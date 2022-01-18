@@ -147,6 +147,9 @@ let g:dashboard_custom_header = [
 \	'╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝'
 \]
 
+let g:indent_blankline_use_treesitter = v:true
+let g:indent_blankline_show_trailing_blankline_indent = v:false
+
 let g:everforest_background = 'hard'
 let g:everforest_diagnostic_text_highlight = 1
 let g:everforest_ui_contrast = 'high'
@@ -681,10 +684,7 @@ require("zen-mode").setup{
 	end
 }
 
-require("indent_blankline").setup {
-	--show_current_context = true,
-	--show_current_context_start = true,
-}
+require("indent_blankline").setup{}
 
 EOF
 
