@@ -31,6 +31,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'anuvyklack/pretty-fold.nvim'
 Plug 'andweeb/presence.nvim'
+Plug 'folke/zen-mode.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -39,6 +41,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'chriskempson/base16-vim'
 Plug 'sainnhe/everforest'
 Plug 'karoliskoncevicius/sacredforest-vim'
+
 call plug#end()
 
 set nocompatible
@@ -53,7 +56,7 @@ set softtabstop=4
 set noexpandtab
 set mouse=a
 set cursorline
-set numberwidth=4
+set numberwidth=5
 set scrolloff=10
 set sidescrolloff=10
 set updatetime=300
@@ -68,9 +71,9 @@ set cmdheight=2
 set shortmess+=c
 set guifont=Hack\ Nerd\ Font\ Mono:h18
 set signcolumn=yes:1
-set foldcolumn=1
+set foldcolumn=0
 set list
-set listchars=tab:\│\\u202F,trail:\\u202F
+"set listchars=tab:\│\\u202F,trail:\\u202F
 
 let g:asyncomplete_auto_completeopt = 0
 
@@ -136,12 +139,12 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:dashboard_default_executive ='telescope'
 
 let g:dashboard_custom_header = [
-	\'███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
-	\'████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
-	\'██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
-	\'██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-	\'██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-	\'╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝'
+\	'███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+\	'████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+\	'██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+\	'██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+\	'██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+\	'╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝'
 \]
 
 let g:everforest_background = 'hard'
@@ -164,8 +167,9 @@ nmap <F7> :TagbarToggle<CR>
 
 let solution_filename = fnamemodify(getcwd() . ".sln", ':t')
 let current_file_filename = fnamemodify(expand("%"), ":~:.")
-
 nmap <F9> :execute '!dotnet-format ' . solution_filename . ' --include ' . current_file_filename<CR>
+
+nmap <F10> :ZenMode<CR>
 
 lua <<EOF
 
@@ -449,13 +453,13 @@ require'nvim-tree'.setup {
 	},
 	view				= {
 		hide_root_folder = false,
-		width			= "25%",
+		width			= "20%",
 		height			= 30,
 		side			= 'left',
 		auto_resize		= true,
 		number			= false,
 		relativenumber	= false,
-		signcolumn		= "yes",
+		signcolumn		= "yes:1",
 		mappings		= {
 			custom_only	= false,
 			list		= {}
@@ -626,6 +630,60 @@ require('pretty-fold').setup{
 require('pretty-fold.preview').setup{
 	key = 'h',
 	border = "rounded"
+}
+
+require("zen-mode").setup{
+	window = {
+		backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+		-- height and width can be:
+		-- * an absolute number of cells when > 1
+		-- * a percentage of the width / height of the editor when <= 1
+		-- * a function that returns the width or the height
+		width = 0.85, -- width of the Zen window
+		height = 1.0, -- height of the Zen window
+		-- by default, no options are changed for the Zen window
+		-- uncomment any of the options below, or add other vim.wo options you want to apply
+		options = {
+			number = true, -- disable number column
+			relativenumber = false, -- disable relative numbers
+			cursorline = true, -- disable cursorline
+			cursorcolumn = false, -- disable cursor column
+			foldcolumn = "0", -- disable fold column
+			list = true, -- disable whitespace characters
+			signcolumn = "yes:1" -- disable signcolumn
+		},
+	},
+	plugins = {
+		-- disable some global vim options (vim.o...)
+		-- comment the lines to not apply the options
+		options = {
+			enabled = true,
+			ruler = false, -- disables the ruler text in the cmd line area
+			showcmd = false -- disables the command in the last line of the screen
+		},
+		twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+		gitsigns = { enabled = false }, -- disables git signs
+		tmux = { enabled = false }, -- disables the tmux statusline
+		-- this will change the font size on kitty when in zen mode
+		-- to make this work, you need to set the following kitty options:
+		-- - allow_remote_control socket-only
+		-- - listen_on unix:/tmp/kitty
+		kitty = {
+			enabled = false,
+			font = "+4" -- font size increment
+		},
+	},
+	-- callback where you can add custom code when the Zen window opens
+	on_open = function(win)
+	end,
+	-- callback where you can add custom code when the Zen window closes
+	on_close = function()
+	end
+}
+
+require("indent_blankline").setup {
+	--show_current_context = true,
+	--show_current_context_start = true,
 }
 
 EOF
