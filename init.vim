@@ -161,7 +161,11 @@ nmap <F4> :FloatermNew --width=0.9 --height=0.9 lazygit<CR>
 nmap <F5> :Telescope find_files<CR>
 nmap <F6> :TroubleToggle<CR>
 nmap <F7> :TagbarToggle<CR>
-nmap <F9> :cd %:p:h<CR>
+
+let solution_filename = fnamemodify(getcwd() . ".sln", ':t')
+let current_file_filename = fnamemodify(expand("%"), ":~:.")
+
+nmap <F9> :execute '!dotnet-format ' . solution_filename . ' --include ' . current_file_filename<CR>
 
 lua <<EOF
 
@@ -332,6 +336,14 @@ nvim_lsp.vimls.setup {
 }
 
 nvim_lsp.sumneko_lua.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	flags = {
+		debounce_text_changes = 150
+	}
+}
+
+nvim_lsp.jsonls.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	flags = {
