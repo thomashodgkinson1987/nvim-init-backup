@@ -73,6 +73,7 @@ set guifont=Hack\ Nerd\ Font\ Mono:h18
 set signcolumn=yes:1
 set foldcolumn=0
 set list
+set listchars+=lead:-,multispace:---+
 "set listchars=tab:\│\\u202F,trail:\\u202F
 
 let g:asyncomplete_auto_completeopt = 0
@@ -160,19 +161,21 @@ colorscheme everforest
 highlight NvimTreeFolderIcon guibg=blue
 
 nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <F2> :FloatermToggle<CR>
+nnoremap <F3> :FloatermNew --width=0.9 --height=0.9<CR>
+nnoremap <F4> :FloatermNew --width=0.9 --height=0.9 lazygit<CR>
+nnoremap <F5> :Telescope find_files<CR>
+nnoremap <F6> :TroubleToggle<CR>
+nnoremap <F7> :TagbarToggle<CR>
+nnoremap <F9> :execute '!dotnet-format ' . fnamemodify(getcwd() . ".sln", ':t') . ' --include ' . fnamemodify(expand("%"), ":~:.")<CR>
+nnoremap <C-F9> :execute '!dotnet-format ' . fnamemodify(getcwd() . ".sln", ':t')<CR>
+nnoremap <F10> :ZenMode<CR>
 
-nmap <F2> :FloatermToggle<CR>
-nmap <F3> :FloatermNew --width=0.9 --height=0.9<CR>
-nmap <F4> :FloatermNew --width=0.9 --height=0.9 lazygit<CR>
-nmap <F5> :Telescope find_files<CR>
-nmap <F6> :TroubleToggle<CR>
-nmap <F7> :TagbarToggle<CR>
-
-let solution_filename = fnamemodify(getcwd() . ".sln", ':t')
-let current_file_filename = fnamemodify(expand("%"), ":~:.")
-nmap <F9> :execute '!dotnet-format ' . solution_filename . ' --include ' . current_file_filename<CR>
-
-nmap <F10> :ZenMode<CR>
+nnoremap <silent>b[ :BufferLineCyclePrev<CR>
+nnoremap <silent>b] :BufferLineCycleNext<CR>
+nnoremap <silent>m[ :BufferLineMovePrev<CR>
+nnoremap <silent>m] :BufferLineMoveNext<CR>
+nnoremap <silent>bd :bdelete! %d<CR>
 
 lua <<EOF
 
@@ -426,7 +429,7 @@ require'nvim-tree'.setup {
 		enable			= false,
 		auto_open		= false
 	},
-	auto_close			= true,
+	auto_close			= false,
 	open_on_tab			= false,
 	hijack_cursor		= true,
 	update_cwd			= false,
