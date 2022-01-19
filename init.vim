@@ -79,8 +79,8 @@ set list
 set listchars+=lead:-,multispace:---+
 
 let g:minimap_width = 10
-let g:minimap_auto_start = 1
-let g:minimap_auto_start_win_enter = 1
+"let g:minimap_auto_start = 1
+"let g:minimap_auto_start_win_enter = 1
 let g:minimap_highlight_range=1
 let g:minimap_highlight_search=1
 let g:minimap_git_colors=1
@@ -367,7 +367,7 @@ require'nvim-treesitter.configs'.setup {
 
 require("trouble").setup{
 	position = "bottom",
-	height = 6,
+	height = 8,
 	width = 50,
 	icons = true,
 	mode = "workspace_diagnostics",
@@ -383,22 +383,22 @@ require("trouble").setup{
 		open_split = { "<c-x>" },
 		open_vsplit = { "<c-v>" },
 		open_tab = { "<c-t>" },
-		jump_close = {"o"},
+		jump_close = { "o" },
 		toggle_mode = "m",
 		toggle_preview = "P",
 		hover = "K",
 		preview = "p",
-		close_folds = {"zM", "zm"},
-		open_folds = {"zR", "zr"},
-		toggle_fold = {"zA", "za"},
+		close_folds = { "zM", "zm" },
+		open_folds = { "zR", "zr" },
+		toggle_fold = { "zA", "za" },
 		previous = "k",
 		next = "j"
 	},
 	indent_lines = true,
 	auto_open = false,
 	auto_close = false,
-	auto_preview = true,
-	auto_fold = false,
+	auto_preview = false,
+	auto_fold = true,
 	auto_jump = {"lsp_definitions"},
 	signs = {
 		error = "",
