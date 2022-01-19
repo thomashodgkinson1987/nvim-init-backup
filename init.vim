@@ -43,7 +43,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 " Themes
 Plug 'chriskempson/base16-vim'
 Plug 'sainnhe/everforest'
-Plug 'karoliskoncevicius/sacredforest-vim'
+Plug 'flazz/vim-colorschemes'
 
 call plug#end()
 
