@@ -34,6 +34,8 @@ Plug 'andweeb/presence.nvim'
 Plug 'folke/zen-mode.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'famiu/bufdelete.nvim'
+Plug 'RRethy/vim-illuminate'
+Plug 'wfxr/minimap.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -58,8 +60,8 @@ set noexpandtab
 set mouse=a
 set cursorline
 set numberwidth=5
-set scrolloff=10
-set sidescrolloff=10
+set scrolloff=4
+set sidescrolloff=4
 set updatetime=300
 set undofile
 set splitright
@@ -75,6 +77,13 @@ set signcolumn=yes:1
 set foldcolumn=0
 set list
 set listchars+=lead:-,multispace:---+
+
+let g:minimap_width = 10
+let g:minimap_auto_start = 1
+let g:minimap_auto_start_win_enter = 1
+let g:minimap_highlight_range=1
+let g:minimap_highlight_search=1
+let g:minimap_git_colors=1
 
 let g:asyncomplete_auto_completeopt = 0
 
@@ -313,6 +322,8 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 	buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+	require'illuminate'.on_attach(client)
 end
 
 local pid = vim.fn.getpid()
