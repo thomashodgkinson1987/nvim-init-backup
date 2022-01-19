@@ -33,6 +33,7 @@ Plug 'anuvyklack/pretty-fold.nvim'
 Plug 'andweeb/presence.nvim'
 Plug 'folke/zen-mode.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'famiu/bufdelete.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -174,7 +175,7 @@ nnoremap <silent>b[ :BufferLineCyclePrev<CR>
 nnoremap <silent>b] :BufferLineCycleNext<CR>
 nnoremap <silent>m[ :BufferLineMovePrev<CR>
 nnoremap <silent>m] :BufferLineMoveNext<CR>
-nnoremap <silent>bd :bdelete! %d<CR>
+nnoremap <silent>bd :Bdelete<CR>
 
 lua <<EOF
 
@@ -183,20 +184,20 @@ cfg = {
 	log_path = vim.fn.stdpath("cache") .. "/lsp_signature.log",
 	verbose = false,
 	bind = true,
-	doc_lines = 10,
+	doc_lines = 6,
 	floating_window = true,
 	floating_window_above_cur_line = true,
 	floating_window_off_x = 1,
-	floating_window_off_y = 1,
+	floating_window_off_y = 2,
 	fix_pos = false,
 	hint_enable = false,
 	hint_prefix = "🐼 ",
 	hint_scheme = "String",
 	hi_parameter = "LspSignatureActiveParameter",
-	max_height = 16,
-	max_width = 60,
+	max_height = 10,
+	max_width = 40,
 	handler_opts = { border = "rounded" },
-	always_trigger = false,
+	always_trigger = true,
 	auto_close_after = nil,
 	extra_trigger_chars = {},
 	zindex = 200,
@@ -527,10 +528,16 @@ require('bufferline').setup {
 		numbers = function(opts)
 			return opts.id
 		end,
-		close_command = "bdelete! %d",
-		right_mouse_command = "bdelete! %d",
+		close_command = function(bufnum)	
+			if vim.fn.bufnr() == bufnum then
+				require('bufdelete').bufdelete(bufnum, true)
+			else
+				vim.cmd('bdelete '..bufnum)
+			end
+		end,
+		right_mouse_command = "vertical sbuffer %d",
 		left_mouse_command = "buffer %d",
-		middle_mouse_command = nil,
+		middle_mouse_command = "sbuffer %d",
 		indicator_icon = '▎',
 		buffer_close_icon = '',
 		modified_icon = '●',
