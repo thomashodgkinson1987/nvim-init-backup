@@ -197,9 +197,9 @@ cfg = {
 	floating_window = true,
 	floating_window_above_cur_line = true,
 	floating_window_off_x = 1,
-	floating_window_off_y = 2,
+	floating_window_off_y = 1,
 	fix_pos = false,
-	hint_enable = false,
+	hint_enable = true,
 	hint_prefix = "🐼 ",
 	hint_scheme = "String",
 	hi_parameter = "LspSignatureActiveParameter",
@@ -228,7 +228,7 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 vim.diagnostic.config({
-	virtual_text = false,
+	virtual_text = true,
 	float = {
 		update_in_insert = true
 	}
@@ -449,10 +449,10 @@ require'nvim-tree'.setup {
 	},
 	view = {
 		hide_root_folder = false,
-		width = "20%",
-		height = 30,
+		width = 40,
+		height = "100%",
 		side = 'left',
-		auto_resize = true,
+		auto_resize = false,
 		number = false,
 		relativenumber = false,
 		signcolumn = "yes:1",
