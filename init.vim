@@ -35,7 +35,6 @@ Plug 'folke/zen-mode.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'famiu/bufdelete.nvim'
 Plug 'RRethy/vim-illuminate'
-Plug 'wfxr/minimap.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -77,13 +76,6 @@ set signcolumn=yes:1
 set foldcolumn=0
 set list
 set listchars+=lead:-,multispace:---+
-
-let g:minimap_width = 10
-"let g:minimap_auto_start = 1
-"let g:minimap_auto_start_win_enter = 1
-let g:minimap_highlight_range=1
-let g:minimap_highlight_search=1
-let g:minimap_git_colors=1
 
 let g:asyncomplete_auto_completeopt = 0
 
@@ -170,15 +162,21 @@ colorscheme everforest
 highlight NvimTreeFolderIcon guibg=blue
 
 nnoremap <C-n> :NvimTreeToggle<CR>
+
 nnoremap <F2> :FloatermToggle<CR>
-nnoremap <F3> :FloatermNew --width=0.9 --height=0.9<CR>
-nnoremap <F4> :FloatermNew --width=0.9 --height=0.9 lazygit<CR>
-nnoremap <F5> :Telescope find_files<CR>
-nnoremap <F6> :TroubleToggle<CR>
-nnoremap <F7> :TagbarToggle<CR>
+nnoremap <C-F2> :FloatermNew --width=1.0 --height=1.0<CR>
+nnoremap <S-F2> :FloatermNew --width=1.0 --height=1.0 lazygit<CR>
+
+nnoremap <F3> :Telescope find_files<CR>
+nnoremap <C-F3> :Telescope lsp_code_actions<CR>
+nnoremap <S-F3> :Telescope lsp_range_code_actions<CR>
+
+nnoremap <F4> :TroubleToggle<CR>
+nnoremap <C-F4> :ZenMode<CR>
+nnoremap <S-F4> :TagbarToggle<CR>
+
 nnoremap <F9> :execute '!dotnet-format ' . fnamemodify(getcwd() . ".sln", ':t') . ' --include ' . fnamemodify(expand("%"), ":~:.")<CR>
 nnoremap <C-F9> :execute '!dotnet-format ' . fnamemodify(getcwd() . ".sln", ':t')<CR>
-nnoremap <F10> :ZenMode<CR>
 
 nnoremap <silent>b[ :BufferLineCyclePrev<CR>
 nnoremap <silent>b] :BufferLineCycleNext<CR>
@@ -194,7 +192,7 @@ cfg = {
 	verbose = false,
 	bind = true,
 	doc_lines = 6,
-	floating_window = true,
+	floating_window = false,
 	floating_window_above_cur_line = true,
 	floating_window_off_x = 1,
 	floating_window_off_y = 1,
@@ -208,7 +206,7 @@ cfg = {
 	handler_opts = { border = "rounded" },
 	always_trigger = true,
 	auto_close_after = nil,
-	extra_trigger_chars = {},
+	extra_trigger_chars = { "(", "," },
 	zindex = 200,
 	padding = '',
 	transparency = nil,
@@ -240,12 +238,11 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local lspkind = require('lspkind')
-local cmp = require'cmp'
+local cmp = require('cmp')
 
 cmp.setup({
 	formatting = {
-		format = lspkind.cmp_format({
+		format = require('lspkind').cmp_format({
 			with_text = true,
 			menu = ({
 				buffer = "[Buffer]",
@@ -634,7 +631,7 @@ require("zen-mode").setup{
 			ruler = false,
 			showcmd = false
 		},
-		twilight = { enabled = true },
+		twilight = { enabled = false },
 		gitsigns = { enabled = false },
 		tmux = { enabled = false },
 		kitty = {
