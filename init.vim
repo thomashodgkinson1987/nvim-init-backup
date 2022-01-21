@@ -37,12 +37,12 @@ Plug 'famiu/bufdelete.nvim'
 Plug 'RRethy/vim-illuminate'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'enricobacis/vim-airline-clock'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Themes
 Plug 'chriskempson/base16-vim'
 Plug 'sainnhe/everforest'
-Plug 'flazz/vim-colorschemes'
 
 call plug#end()
 
@@ -75,7 +75,7 @@ set guifont=Hack\ Nerd\ Font\ Mono:h18
 set signcolumn=yes:1
 set foldcolumn=0
 set list
-set listchars+=lead:-,multispace:---+
+"set listchars+=lead:-,multispace:---+
 
 let g:asyncomplete_auto_completeopt = 0
 
@@ -164,19 +164,20 @@ highlight NvimTreeFolderIcon guibg=blue
 nnoremap <C-n> :NvimTreeToggle<CR>
 
 nnoremap <F2> :FloatermToggle<CR>
-nnoremap <C-F2> :FloatermNew --width=1.0 --height=1.0<CR>
-nnoremap <S-F2> :FloatermNew --width=1.0 --height=1.0 lazygit<CR>
+nnoremap <S-F2> :FloatermNew --width=1.0 --height=1.0<CR>
+nnoremap <C-F2> :FloatermNew --width=1.0 --height=1.0 lazygit<CR>
 
 nnoremap <F3> :Telescope find_files<CR>
-nnoremap <C-F3> :Telescope lsp_code_actions<CR>
-nnoremap <S-F3> :Telescope lsp_range_code_actions<CR>
+nnoremap <S-F3> :Telescope lsp_code_actions<CR>
+nnoremap <C-F3> :Telescope lsp_range_code_actions<CR>
 
 nnoremap <F4> :TroubleToggle<CR>
-nnoremap <C-F4> :ZenMode<CR>
 nnoremap <S-F4> :TagbarToggle<CR>
 
 nnoremap <F9> :execute '!dotnet-format ' . fnamemodify(getcwd() . ".sln", ':t') . ' --include ' . fnamemodify(expand("%"), ":~:.")<CR>
 nnoremap <C-F9> :execute '!dotnet-format ' . fnamemodify(getcwd() . ".sln", ':t')<CR>
+
+nnoremap <F10> :ZenMode<CR>
 
 nnoremap <silent>b[ :BufferLineCyclePrev<CR>
 nnoremap <silent>b] :BufferLineCycleNext<CR>
@@ -364,7 +365,7 @@ require'nvim-treesitter.configs'.setup {
 
 require("trouble").setup{
 	position = "bottom",
-	height = 8,
+	height = 5,
 	width = 50,
 	icons = true,
 	mode = "workspace_diagnostics",
