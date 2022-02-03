@@ -9,6 +9,8 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'onsails/lspkind-nvim'
 Plug 'folke/lsp-colors.nvim'
@@ -76,6 +78,36 @@ set signcolumn=yes:1
 set foldcolumn=0
 set list
 "set listchars+=lead:-,multispace:---+
+
+let g:vsnip_extra_mapping = v:true
+
+" NOTE: You can use other key to expand snippet.
+
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" See https://github.com/hrsh7th/vim-vsnip/pull/50
+nmap        s   <Plug>(vsnip-select-text)
+xmap        s   <Plug>(vsnip-select-text)
+nmap        S   <Plug>(vsnip-cut-text)
+xmap        S   <Plug>(vsnip-cut-text)
+
+" If you want to use snippet for multiple filetypes, you can `g:vsnip_filetypes` for it.
+"let g:vsnip_filetypes = {}
+"let g:vsnip_filetypes.javascriptreact = ['javascript']
+"let g:vsnip_filetypes.typescriptreact = ['typescript']
 
 let g:asyncomplete_auto_completeopt = 0
 
@@ -192,7 +224,7 @@ cfg = {
 	log_path = vim.fn.stdpath("cache") .. "/lsp_signature.log",
 	verbose = false,
 	bind = true,
-	doc_lines = 6,
+	doc_lines = 10,
 	floating_window = false,
 	floating_window_above_cur_line = true,
 	floating_window_off_x = 1,
@@ -202,8 +234,8 @@ cfg = {
 	hint_prefix = "🐼 ",
 	hint_scheme = "String",
 	hi_parameter = "LspSignatureActiveParameter",
-	max_height = 10,
-	max_width = 40,
+	max_height = 20,
+	max_width = 80,
 	handler_opts = { border = "rounded" },
 	always_trigger = true,
 	auto_close_after = nil,
@@ -213,7 +245,7 @@ cfg = {
 	transparency = nil,
 	shadow_blend = 36,
 	shadow_guibg = 'Black',
-	timer_interval = 10,
+	timer_interval = 1,
 	toggle_key = '<F8>'
 }
 
@@ -365,7 +397,7 @@ require'nvim-treesitter.configs'.setup {
 
 require("trouble").setup{
 	position = "bottom",
-	height = 5,
+	height = 6,
 	width = 50,
 	icons = true,
 	mode = "workspace_diagnostics",
@@ -447,7 +479,7 @@ require'nvim-tree'.setup {
 	},
 	view = {
 		hide_root_folder = false,
-		width = 40,
+		width = 38,
 		height = "100%",
 		side = 'left',
 		auto_resize = false,
@@ -614,7 +646,7 @@ require('pretty-fold.preview').setup{
 require("zen-mode").setup{
 	window = {
 		backdrop = 0.95,
-		width = 0.85,
+		width = 0.75,
 		height = 1.0,
 		options = {
 			number = true,
