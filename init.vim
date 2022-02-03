@@ -1,40 +1,40 @@
 call plug#begin('C:\Users\Tom\.local\share\nvim\plugged')
 
 " LSP related
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'rafamadriz/friendly-snippets'
-Plug 'williamboman/nvim-lsp-installer'
-Plug 'onsails/lspkind-nvim'
-Plug 'folke/lsp-colors.nvim'
-Plug 'ray-x/lsp_signature.nvim'
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'hrsh7th/cmp-nvim-lsp'
+"Plug 'hrsh7th/cmp-buffer'
+"Plug 'hrsh7th/cmp-path'
+"Plug 'hrsh7th/cmp-cmdline'
+"Plug 'hrsh7th/nvim-cmp'
+"Plug 'hrsh7th/cmp-vsnip'
+"Plug 'hrsh7th/vim-vsnip'
+"Plug 'hrsh7th/vim-vsnip-integ'
+"Plug 'rafamadriz/friendly-snippets'
+"Plug 'williamboman/nvim-lsp-installer'
+"Plug 'onsails/lspkind-nvim'
+"Plug 'folke/lsp-colors.nvim'
+"Plug 'ray-x/lsp_signature.nvim'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " General
 Plug 'glepnir/dashboard-nvim'
-Plug 'preservim/tagbar'
 Plug 'akinsho/bufferline.nvim'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-fugitive'
+"Plug 'sheerun/vim-polyglot'
+"Plug 'tpope/vim-fugitive'
 Plug 'folke/trouble.nvim'
-Plug 'akinsho/toggleterm.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'anuvyklack/pretty-fold.nvim'
 Plug 'andweeb/presence.nvim'
 Plug 'folke/zen-mode.nvim'
-Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'famiu/bufdelete.nvim'
 Plug 'RRethy/vim-illuminate'
 Plug 'vim-airline/vim-airline'
@@ -48,6 +48,7 @@ Plug 'sainnhe/everforest'
 
 call plug#end()
 
+set hidden
 set nocompatible
 set completeopt=menu,menuone,noinsert,noselect,preview
 set clipboard=unnamedplus
@@ -77,37 +78,7 @@ set guifont=Hack\ Nerd\ Font\ Mono:h18
 set signcolumn=yes:1
 set foldcolumn=0
 set list
-"set listchars+=lead:-,multispace:---+
-
-let g:vsnip_extra_mapping = v:true
-
-" NOTE: You can use other key to expand snippet.
-
-" Expand
-imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-
-" Expand or jump
-imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-
-" Jump forward or backward
-imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-
-" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
-" See https://github.com/hrsh7th/vim-vsnip/pull/50
-nmap        s   <Plug>(vsnip-select-text)
-xmap        s   <Plug>(vsnip-select-text)
-nmap        S   <Plug>(vsnip-cut-text)
-xmap        S   <Plug>(vsnip-cut-text)
-
-" If you want to use snippet for multiple filetypes, you can `g:vsnip_filetypes` for it.
-"let g:vsnip_filetypes = {}
-"let g:vsnip_filetypes.javascriptreact = ['javascript']
-"let g:vsnip_filetypes.typescriptreact = ['typescript']
+set listchars+=lead:-,multispace:---+
 
 let g:asyncomplete_auto_completeopt = 0
 
@@ -163,8 +134,6 @@ let g:nvim_tree_icons = {
 \	}
 \}
 
-let g:tagbar_ctags_bin = 'C:\Users\Tom\Downloads\ctags\ctags.exe'
-
 let g:airline_theme = 'everforest'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -181,9 +150,6 @@ let g:dashboard_custom_header = [
 \	'╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝'
 \]
 
-let g:indent_blankline_use_treesitter = v:true
-let g:indent_blankline_show_trailing_blankline_indent = v:false
-
 let g:everforest_background = 'hard'
 let g:everforest_diagnostic_text_highlight = 1
 let g:everforest_ui_contrast = 'high'
@@ -197,14 +163,12 @@ nnoremap <C-n> :NvimTreeToggle<CR>
 
 nnoremap <F2> :FloatermToggle<CR>
 nnoremap <S-F2> :FloatermNew --width=1.0 --height=1.0<CR>
-nnoremap <C-F2> :FloatermNew --width=1.0 --height=1.0 lazygit<CR>
+nnoremap <C-F2> :FloatermNew --width=0.75 --height=0.75<CR>
 
 nnoremap <F3> :Telescope find_files<CR>
-nnoremap <S-F3> :Telescope lsp_code_actions<CR>
-nnoremap <C-F3> :Telescope lsp_range_code_actions<CR>
+nnoremap <S-F3> :Telescope fd<CR>
 
 nnoremap <F4> :TroubleToggle<CR>
-nnoremap <S-F4> :TagbarToggle<CR>
 
 nnoremap <F9> :execute '!dotnet-format ' . fnamemodify(getcwd() . ".sln", ':t') . ' --include ' . fnamemodify(expand("%"), ":~:.")<CR>
 nnoremap <C-F9> :execute '!dotnet-format ' . fnamemodify(getcwd() . ".sln", ':t')<CR>
@@ -217,53 +181,216 @@ nnoremap <silent>m[ :BufferLineMovePrev<CR>
 nnoremap <silent>m] :BufferLineMoveNext<CR>
 nnoremap <silent>bd :Bdelete<CR>
 
+
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+
+
+
+
+
+
+
+
+
+
+
 lua <<EOF
 
-cfg = {
-	debug = false,
-	log_path = vim.fn.stdpath("cache") .. "/lsp_signature.log",
-	verbose = false,
-	bind = true,
-	doc_lines = 10,
-	floating_window = false,
-	floating_window_above_cur_line = true,
-	floating_window_off_x = 1,
-	floating_window_off_y = 1,
-	fix_pos = false,
-	hint_enable = true,
-	hint_prefix = "🐼 ",
-	hint_scheme = "String",
-	hi_parameter = "LspSignatureActiveParameter",
-	max_height = 20,
-	max_width = 80,
-	handler_opts = { border = "rounded" },
-	always_trigger = true,
-	auto_close_after = nil,
-	extra_trigger_chars = { "(", "," },
-	zindex = 200,
-	padding = '',
-	transparency = nil,
-	shadow_blend = 36,
-	shadow_guibg = 'Black',
-	timer_interval = 1,
-	toggle_key = '<F8>'
+require('telescope').setup {
+	extensions = {
+		fzy_native = {
+			override_generic_sorter = false,
+			override_file_sorter = true,
+		}
+	}
 }
 
-require'lsp_signature'.setup(cfg)
+require('telescope').load_extension('fzy_native')
 
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-	opts = opts or {}
-	opts.border = opts.border or "rounded"
-	return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
+--cfg = {
+--	debug = false,
+--	log_path = vim.fn.stdpath("cache") .. "/lsp_signature.log",
+--	verbose = false,
+--	bind = true,
+--	doc_lines = 10,
+--	floating_window = false,
+--	floating_window_above_cur_line = true,
+--	floating_window_off_x = 1,
+--	floating_window_off_y = 1,
+--	fix_pos = false,
+--	hint_enable = true,
+--	hint_prefix = "🐼 ",
+--	hint_scheme = "String",
+--	hi_parameter = "LspSignatureActiveParameter",
+--	max_height = 20,
+--	max_width = 80,
+--	handler_opts = { border = "rounded" },
+--	always_trigger = true,
+--	auto_close_after = nil,
+--	extra_trigger_chars = { "(", "," },
+--	zindex = 200,
+--	padding = '',
+--	transparency = nil,
+--	shadow_blend = 36,
+--	shadow_guibg = 'Black',
+--	timer_interval = 1,
+--	toggle_key = '<F8>'
+--}
 
-vim.diagnostic.config({
-	virtual_text = true,
-	float = {
-		update_in_insert = true
-	}
-})
+--require'lsp_signature'.setup(cfg)
+
+--local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+--function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+--	opts = opts or {}
+--	opts.border = opts.border or "rounded"
+--	return orig_util_open_floating_preview(contents, syntax, opts, ...)
+--end
+
+--vim.diagnostic.config({
+--	virtual_text = true,
+--	float = {
+--		update_in_insert = true
+--	}
+--})
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
@@ -271,118 +398,118 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local cmp = require('cmp')
+--local cmp = require('cmp')
 
-cmp.setup({
-	formatting = {
-		format = require('lspkind').cmp_format({
-			with_text = true,
-			menu = ({
-				buffer = "[Buffer]",
-				nvim_lsp = "[LSP]",
-				luasnip = "[LuaSnip]",
-				nvim_lua = "[Lua]",
-				latex_symbols = "[Latex]"
-			})
-		}),
-	},
-	snippet = {
-		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body)
-		end
-	},
-	mapping = {
-		['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-		['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-		['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-		['<C-y>'] = cmp.config.disable,
-		['<C-e>'] = cmp.mapping({
-			i = cmp.mapping.abort(),
-			c = cmp.mapping.close()
-		}),
-		['<CR>'] = cmp.mapping.confirm({ select = true })
-	},
-	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
-		{ name = 'vsnip' }
-	}, {
-		{ name = 'buffer' }
-	})
-})
+--cmp.setup({
+--	formatting = {
+--		format = require('lspkind').cmp_format({
+--			with_text = true,
+--			menu = ({
+--				buffer = "[Buffer]",
+--				nvim_lsp = "[LSP]",
+--				luasnip = "[LuaSnip]",
+--				nvim_lua = "[Lua]",
+--				latex_symbols = "[Latex]"
+--			})
+--		}),
+--	},
+--	snippet = {
+--		expand = function(args)
+--			vim.fn["vsnip#anonymous"](args.body)
+--		end
+--	},
+--	mapping = {
+--		['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+--		['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+--		['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+--		['<C-y>'] = cmp.config.disable,
+--		['<C-e>'] = cmp.mapping({
+--			i = cmp.mapping.abort(),
+--			c = cmp.mapping.close()
+--		}),
+--		['<CR>'] = cmp.mapping.confirm({ select = true })
+--	},
+--	sources = cmp.config.sources({
+--		{ name = 'nvim_lsp' },
+--		{ name = 'vsnip' }
+--	}, {
+--		{ name = 'buffer' }
+--	})
+--})
 
-cmp.setup.cmdline('/', {
-	sources = {
-		{ name = 'buffer' }
-	}
-})
+--cmp.setup.cmdline('/', {
+--	sources = {
+--		{ name = 'buffer' }
+--	}
+--})
 
-cmp.setup.cmdline(':', {
-	sources = cmp.config.sources({
-		{ name = 'path' }
-	}, {
-		{ name = 'cmdline' }
-	})
-})
+--cmp.setup.cmdline(':', {
+--	sources = cmp.config.sources({
+--		{ name = 'path' }
+--	}, {
+--		{ name = 'cmdline' }
+--	})
+--})
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local nvim_lsp = require('lspconfig')
+--local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+--local nvim_lsp = require('lspconfig')
 
-local on_attach = function(client, bufnr)
-	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-	local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+--local on_attach = function(client, bufnr)
+--	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+--	local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+--
+--	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+--
+--	local opts = { noremap=true, silent=true }
+--
+--	buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+--	buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+--	buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+--	buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+--	buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+--	buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+--	buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+--	buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+--	buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+--	buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+--	buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+--	buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+--	buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+--	buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+--	buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+--	buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+--	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+--
+--	require'illuminate'.on_attach(client)
+--end
 
-	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+--local pid = vim.fn.getpid()
+--local omnisharp_bin = "C:/Users/Tom/AppData/Local/nvim-data/lsp_servers/omnisharp/omnisharp/OmniSharp.exe"
 
-	local opts = { noremap=true, silent=true }
+--nvim_lsp.omnisharp.setup {
+--	on_attach = on_attach,
+--	capabilities = capabilities,
+--	cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) },
+--	flags = { debounce_text_changes = 150 }
+--}
 
-	buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-	buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-	buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-	buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-	buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-	buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-	buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-	buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-	buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-	buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-	buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-	buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-	buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-	buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-	buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-	buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+--nvim_lsp.vimls.setup {
+--	on_attach = on_attach,
+--	capabilities = capabilities,
+--	flags = { debounce_text_changes = 150 }
+--}
 
-	require'illuminate'.on_attach(client)
-end
+--nvim_lsp.sumneko_lua.setup {
+--	on_attach = on_attach,
+--	capabilities = capabilities,
+--	flags = { debounce_text_changes = 150 }
+--}
 
-local pid = vim.fn.getpid()
-local omnisharp_bin = "C:/Users/Tom/AppData/Local/nvim-data/lsp_servers/omnisharp/omnisharp/OmniSharp.exe"
-
-nvim_lsp.omnisharp.setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-	cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) },
-	flags = { debounce_text_changes = 150 }
-}
-
-nvim_lsp.vimls.setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-	flags = { debounce_text_changes = 150 }
-}
-
-nvim_lsp.sumneko_lua.setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-	flags = { debounce_text_changes = 150 }
-}
-
-nvim_lsp.jsonls.setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-	flags = { debounce_text_changes = 150 }
-}
+--nvim_lsp.jsonls.setup {
+--	on_attach = on_attach,
+--	capabilities = capabilities,
+--	flags = { debounce_text_changes = 150 }
+--}
 
 require'nvim-treesitter.configs'.setup {
 	ensure_installed = "maintained",
@@ -395,50 +522,50 @@ require'nvim-treesitter.configs'.setup {
 	},
 }
 
-require("trouble").setup{
-	position = "bottom",
-	height = 6,
-	width = 50,
-	icons = true,
-	mode = "workspace_diagnostics",
-	fold_open = "",
-	fold_closed = "",
-	group = true,
-	padding = true,
-	action_keys = {
-		close = "q",
-		cancel = "<esc>",
-		refresh = "r",
-		jump = {"<cr>", "<tab>"},
-		open_split = { "<c-x>" },
-		open_vsplit = { "<c-v>" },
-		open_tab = { "<c-t>" },
-		jump_close = { "o" },
-		toggle_mode = "m",
-		toggle_preview = "P",
-		hover = "K",
-		preview = "p",
-		close_folds = { "zM", "zm" },
-		open_folds = { "zR", "zr" },
-		toggle_fold = { "zA", "za" },
-		previous = "k",
-		next = "j"
-	},
-	indent_lines = true,
-	auto_open = false,
-	auto_close = false,
-	auto_preview = false,
-	auto_fold = true,
-	auto_jump = {"lsp_definitions"},
-	signs = {
-		error = "",
-		warning = "",
-		hint = "",
-		information = "",
-		other = ""
-	},
-	use_diagnostic_signs = false
-}
+--require("trouble").setup{
+--	position = "bottom",
+--	height = 6,
+--	width = 50,
+--	icons = true,
+--	mode = "workspace_diagnostics",
+--	fold_open = "",
+--	fold_closed = "",
+--	group = true,
+--	padding = true,
+--	action_keys = {
+--		close = "q",
+--		cancel = "<esc>",
+--		refresh = "r",
+--		jump = {"<cr>", "<tab>"},
+--		open_split = { "<c-x>" },
+--		open_vsplit = { "<c-v>" },
+--		open_tab = { "<c-t>" },
+--		jump_close = { "o" },
+--		toggle_mode = "m",
+--		toggle_preview = "P",
+--		hover = "K",
+--		preview = "p",
+--		close_folds = { "zM", "zm" },
+--		open_folds = { "zR", "zr" },
+--		toggle_fold = { "zA", "za" },
+--		previous = "k",
+--		next = "j"
+--	},
+--	indent_lines = true,
+--	auto_open = false,
+--	auto_close = false,
+--	auto_preview = false,
+--	auto_fold = true,
+--	auto_jump = {"lsp_definitions"},
+--	signs = {
+--		error = "",
+--		warning = "",
+--		hint = "",
+--		information = "",
+--		other = ""
+--	},
+--	use_diagnostic_signs = false
+--}
 
 require'nvim-tree'.setup {
 	disable_netrw = true,
@@ -515,23 +642,6 @@ require('gitsigns').setup {
 	word_diff  = false,
 	keymaps = {
 		noremap = true,
-
-		['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'"},
-		['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'"},
-
-		['n <leader>hs'] = '<cmd>Gitsigns stage_hunk<CR>',
-		['v <leader>hs'] = ':Gitsigns stage_hunk<CR>',
-		['n <leader>hu'] = '<cmd>Gitsigns undo_stage_hunk<CR>',
-		['n <leader>hr'] = '<cmd>Gitsigns reset_hunk<CR>',
-		['v <leader>hr'] = ':Gitsigns reset_hunk<CR>',
-		['n <leader>hR'] = '<cmd>Gitsigns reset_buffer<CR>',
-		['n <leader>hp'] = '<cmd>Gitsigns preview_hunk<CR>',
-		['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
-		['n <leader>hS'] = '<cmd>Gitsigns stage_buffer<CR>',
-		['n <leader>hU'] = '<cmd>Gitsigns reset_buffer_index<CR>',
-
-		['o ih'] = ':<C-U>Gitsigns select_hunk<CR>',
-		['x ih'] = ':<C-U>Gitsigns select_hunk<CR>'
 	},
 	watch_gitdir = {
 		interval = 1000,
@@ -569,7 +679,7 @@ require('bufferline').setup {
 		numbers = function(opts)
 			return opts.id
 		end,
-		close_command = function(bufnum)	
+		close_command = function(bufnum)
 			if vim.fn.bufnr() == bufnum then
 				require('bufdelete').bufdelete(bufnum, true)
 			else
@@ -677,8 +787,6 @@ require("zen-mode").setup{
 	on_close = function()
 	end
 }
-
-require("indent_blankline").setup{}
 
 EOF
 
