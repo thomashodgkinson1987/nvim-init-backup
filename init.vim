@@ -78,7 +78,7 @@ set guifont=Hack\ Nerd\ Font\ Mono:h18
 set signcolumn=yes:1
 set foldcolumn=0
 set list
-set listchars+=lead:-,multispace:---+
+set listchars+=lead:-,multispace:---+,tab:▎⠀⠀
 
 let g:asyncomplete_auto_completeopt = 0
 
